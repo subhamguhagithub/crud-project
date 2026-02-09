@@ -1,0 +1,44 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Background */
+body {
+  font-family: "Segoe UI", sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Root Container */
+#root {
+  min-height: 100vh;
+  padding: 30px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Main App Wrapper */
+.app-wrapper {
+  width: 100%;
+}
+
+/* Add Button (Top Left) */
+.add-btn {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background: linear-gradient(to right, #43cea2, #185a9d);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.add-btn:hover {
+  opacity: 0.9;
+}
