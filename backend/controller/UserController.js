@@ -3,7 +3,7 @@ const User = require("../models/User");
 // CREATE
 const createUser = async (req, res) => {
   try {
-    const { name, email, password, country, gender } = req.body;
+    const { name, email, password, country, gender,price} = req.body;
 
     const image = req.file ? req.file.filename : null;
 
@@ -13,7 +13,9 @@ const createUser = async (req, res) => {
       password,
       country,
       gender,
+      price,
       image
+      
     });
 
     await user.save();

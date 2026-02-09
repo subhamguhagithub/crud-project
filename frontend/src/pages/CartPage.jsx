@@ -9,32 +9,21 @@ import {
 
 function CartPage() {
   const dispatch = useDispatch();
-
-  // Get cart items from redux store
   const cartItems = useSelector((state) => state.cart.items);
 
-  // Calculate total price
+  // Calculate total price using reduce
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  // 👉 Place Order API
   const handlePlaceOrder = async () => {
     try {
-      const res = await fetch(
-        "http://localhost:5000/api/orders/place-order",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            items: cartItems,
-            totalPrice: totalPrice,
-          }),
-        }
-      );
+      const res = await fetch("http://localhost:5000/api/orders/place-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: cartItems, totalPrice }),
+      });
 
       const data = await res.json();
 
@@ -51,60 +40,26 @@ function CartPage() {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "700px", margin: "auto" }}>
-      <h2 style={{ textAlign: "center" }}>🛒 My Cart</h2>
+    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
+      <h2>Cart</h2>
 
       {cartItems.length === 0 ? (
-        <h3 style={{ textAlign: "center", marginTop: "30px" }}>
-          Your cart is empty
-        </h3>
+        <p>Your cart is empty.</p>
       ) : (
         <>
           {cartItems.map((item) => (
-            <div
-              key={item._id}
-              style={{
-                border: "1px solid #ccc",
-                padding: "15px",
-                marginBottom: "15px",
-                borderRadius: "6px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              {/* Product Info */}
-              <div>
-                <h4>{item.name}</h4>
-                <p>Price: ₹{item.price}</p>
-                <p>Quantity: {item.quantity}</p>
-              </div>
-
-              {/* Buttons */}
-              <div>
-                <button
-                  onClick={() => dispatch(decreaseQty(item._id))}
-                  style={{ padding: "5px 10px" }}
-                >
-                  -
-                </button>
-
-                <button
-                  onClick={() => dispatch(addToCart(item))}
-                  style={{ margin: "0 10px", padding: "5px 10px" }}
-                >
-                  +
-                </button>
-
-                <button
+            <div key={item._id} style={{ marginBottom: "10px", borderBottom: "1px solid #eee", paddingBottom: "10px" }}>
+              {/* This line matches the exact format shown in your photo */}
+              <span>
+                {item.name} - ₹{item.price} x {item.quantity}
+              </span>
+              
+              <div style={{ marginTop: "5px" }}>
+                <button onClick={() => dispatch(decreaseQty(item._id))}>-</button>
+                <button style={{ margin: "0 10px" }} onClick={() => dispatch(addToCart(item))}>+</button>
+                <button 
+                  style={{ background: "#ff4d4d", color: "white", border: "none", cursor: "pointer" }} 
                   onClick={() => dispatch(removeFromCart(item._id))}
-                  style={{
-                    background: "#ff4d4d",
-                    color: "white",
-                    border: "none",
-                    padding: "5px 10px",
-                    cursor: "pointer",
-                  }}
                 >
                   Remove
                 </button>
@@ -112,48 +67,37 @@ function CartPage() {
             </div>
           ))}
 
-          {/* Total + Actions */}
-          <div
-            style={{
-              marginTop: "20px",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
+          <div style={{ marginTop: "20px" }}>
             <h3>Total: ₹{totalPrice}</h3>
+            
+            <button
+              onClick={handlePlaceOrder}
+              style={{
+                background: "green",
+                color: "white",
+                padding: "10px 20px",
+                border: "none",
+                cursor: "pointer",
+                borderRadius: "4px",
+                marginTop: "10px"
+              }}
+            >
+              Place Order
+            </button>
 
-            <div>
-              <button
-                onClick={() => dispatch(clearCart())}
-                style={{
-                  background: "red",
-                  color: "white",
-                  padding: "10px",
-                  border: "none",
-                  cursor: "pointer",
-                  marginRight: "10px",
-                  borderRadius: "4px",
-                }}
-              >
-                Clear Cart
-              </button>
-
-              <button
-                onClick={handlePlaceOrder}
-                style={{
-                  background: "green",
-                  color: "white",
-                  padding: "10px 15px",
-                  border: "none",
-                  cursor: "pointer",
-                  borderRadius: "4px",
-                }}
-              >
-                Place Order
-              </button>
-            </div>
+            <button
+              onClick={() => dispatch(clearCart())}
+              style={{
+                background: "transparent",
+                color: "red",
+                marginLeft: "15px",
+                border: "1px solid red",
+                cursor: "pointer",
+                padding: "5px 10px"
+              }}
+            >
+              Clear Cart
+            </button>
           </div>
         </>
       )}

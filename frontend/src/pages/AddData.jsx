@@ -9,6 +9,7 @@ function AddData() {
     password: "",
     country: "",
     gender: "",
+    price: "",
     image: ""
   });
 
@@ -42,8 +43,9 @@ function AddData() {
       formDataObj.append("password", formData.password);
       formDataObj.append("country", formData.country);
       formDataObj.append("gender", formData.gender);
+      formDataObj.append("price", formData.price);
       formDataObj.append("image", formData.image);
-
+      
       const response = await fetch("http://localhost:5000/api/register", {
         method: "POST",
         body: formDataObj
@@ -61,6 +63,7 @@ function AddData() {
           password: "",
           country: "",
           gender: "",
+          price: "",
           image: ""
         });
 
@@ -178,6 +181,18 @@ function AddData() {
             </label>
 
           </div>
+        </div>
+        
+        {/* Price */}
+        <div className="form-group">
+          <label htmlFor="price">Price</label>
+          <input
+            type="number"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         {/* Image Upload */}
