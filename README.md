@@ -34,14 +34,18 @@ crud-project/
 │ └── server.js
 │
 ├── frontend/
+│ ├── public/
 │ ├── src/
-│ │ ├── pages/
 │ │ ├── assets/
-│ │ └── App.jsx
+│ │ ├── pages/
+│ │ ├── App.jsx
+│ │ └── main.jsx
+│ │
 │ └── package.json
 │
-└── README.md
-
+├── .gitignore
+├── README.md
+└── package.json
 ---
 
 ## ⚙️ Installation & Setup
