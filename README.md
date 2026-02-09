@@ -28,24 +28,25 @@ A full-stack CRUD (Create, Read, Update, Delete) web application built using the
 crud-project/
 │
 ├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
+│ │
+│ ├── controllers/
+│ ├── models/
+│ ├── routes/
+│ └── server.js
 │
 ├── frontend/
-│   ├── public/
-│   └── src/
-│       ├── assets/
-│       ├── pages/
-│       ├── App.jsx
-│       └── main.jsx
+│ │
+│ ├── public/
+│ └── src/
+│ │
+│ ├── assets/
+│ ├── pages/
+│ ├── App.jsx
+│ └── main.jsx
 │
 ├── .gitignore
 ├── README.md
 └── package.json
-
----
 
 ## ⚙️ Installation & Setup
 
